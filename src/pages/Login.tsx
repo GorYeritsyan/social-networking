@@ -6,19 +6,16 @@ import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { useEffect } from "react";
 import { fetchLogin } from "../store/slices/authSlice";
 import { Navigate, useNavigate } from "react-router-dom";
+import { LoginType } from "../types/types";
 
 const Login = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { userId } = useAppSelector((state) => state.authData);
-  function handleSubmit(values: {email: string, password: string}) {
+  function authUser(values: LoginType) {
     dispatch(fetchLogin(values));
-    navigate(`/profile/${userId}`)
   }
-
-  console.log(userId);
-
+  
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Not a valid email address")
@@ -47,7 +44,7 @@ const Login = () => {
             email: "",
             password: "",
           }}
-          onSubmit={(values) => handleSubmit(values)}
+          onSubmit={(values) => authUser(values)}
           validationSchema={validationSchema}
         >
           {() => (

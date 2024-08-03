@@ -8,10 +8,7 @@ type InputProps = {
 const Input = ({ type, labelName }: InputProps) => {
   return (
     <div>
-      <label
-        htmlFor={type}
-        className="block text-sm font-medium leading-6 text-gray-900"
-      >
+      <label htmlFor={type} className="block text-sm font-medium leading-6 text-gray-900">
         {labelName}
       </label>
       <div className="mt-2">

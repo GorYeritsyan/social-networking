@@ -44,3 +44,11 @@ export type ContactsStateType<T> = {
   github: T;
   mainLink: T;
 };
+
+
+//login type
+
+export type LoginType = {
+  email: string;
+  password: string;
+}
