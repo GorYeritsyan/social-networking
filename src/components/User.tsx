@@ -10,7 +10,7 @@ const User = ({ user }: UserProps) => {
   return (
     <li
       key={user.id}
-      className=" hover:bg-gray-50 flex justify-between gap-x-6 py-5 px-4"
+      className=" hover:bg-gray-100 flex justify-between gap-x-6 py-5 px-4"
     >
       <Container>
         <div className="flex min-w-[1440px] gap-x-4">

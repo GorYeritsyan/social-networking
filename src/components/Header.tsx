@@ -8,7 +8,7 @@ const Header = () => {
       </h1>
       <button>
         <Link to="/login" className="text-white">
-          Log in
+          Sign in
         </Link>
       </button>
     </header>

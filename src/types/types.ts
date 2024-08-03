@@ -2,7 +2,7 @@ export type UsersInitState = {
   users: UserDataType[] | null;
 };
 
-type UserPhoto = {
+export type UserPhoto = {
   small: string;
   large: string;
 };
@@ -19,4 +19,28 @@ export type UsersResponse = {
   items: UserDataType[];
   totalCount: number;
   error: string | null;
+};
+
+
+// Profile
+
+export type ProfileResponseType = {
+  aboutMe: string;
+  contacts: ContactsStateType<string | null>;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  userId: number;
+  photos: UserPhoto;
+};
+
+export type ContactsStateType<T> = {
+  facebook: T;
+  website: T;
+  vk: T;
+  twitter: T;
+  instagram: T;
+  youtube: T;
+  github: T;
+  mainLink: T;
 };
