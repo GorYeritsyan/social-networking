@@ -10,6 +10,7 @@ const Home = () => {
     dispatch(fetchUsers(page));
   }, [page]);
 
+
   return (
     <div className="flex flex-col gap-y-5">
       <h1 className="ml-10 mt-5">Users</h1>

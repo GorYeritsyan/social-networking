@@ -57,6 +57,7 @@ export type LoginType = {
 
 export type LoginResponseDataType = {
   userId: number;
+  token: string;
 };
 
 export type AuthMeDataType = {

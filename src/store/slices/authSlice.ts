@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AuthAPI } from "../../api/api";
+import { AuthAPI, token } from "../../api/api";
 import { AuthMeDataType, LoginResponseDataType, LoginType } from "../../types/types";
-
-
 
 export const fetchLogin = createAsyncThunk<
   LoginResponseDataType,
@@ -13,27 +11,37 @@ export const fetchLogin = createAsyncThunk<
   return res.data.data;
 });
 
-export const authMe = createAsyncThunk<AuthMeDataType, void, {}>(
-  "authMe",
+export const fetchLogout = createAsyncThunk(
+  'fetchLogout',
   async () => {
-    const res = await AuthAPI.isAuth();
+    const res = await AuthAPI.logout();
+    return res.data.data
+  }
+)
+
+export const fetchAuthMe = createAsyncThunk<AuthMeDataType, string | null, {}>(
+  "fetchAuthMe",
+  async (newToken) => {
+    const res = await AuthAPI.isAuth(newToken);
     return res.data.data;
   }
 );
 
 type LoginInitState = {
   userId: number | null;
-  token?: string;
-  id?: number | null;
-  email: string;
-  login: string ;
+  token: string | null,
+  loggedUser: {
+    id?: number | null;
+    email?: string;
+    login?: string ;
+
+  }
 };
 
 const initialState: LoginInitState = {
   userId: null,
-  id: null,
-  email: '',
-  login: '',
+  token: localStorage.getItem('token'),
+  loggedUser: {},
 };
 
 const authSlice = createSlice({
@@ -42,13 +50,17 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      state.userId = action.payload.userId
+      state.userId = action.payload.userId,
+      localStorage.setItem('token', action.payload.token)
     });
 
-    builder.addCase(authMe.fulfilled, (state, action) => {
-      state.email = action.payload.email;
-      state.login = action.payload.login;
-      state.id = action.payload.id
+    builder.addCase(fetchLogout.fulfilled, (state) => {
+      state.loggedUser = {}
+      localStorage.setItem('token', '')
+    })
+
+    builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
+      state.loggedUser = action.payload
     });
   },
 });

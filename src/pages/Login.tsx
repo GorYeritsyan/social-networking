@@ -7,14 +7,16 @@ import Input from "../components/Input";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { fetchLogin } from "../store/slices/authSlice";
 import { LoginType } from "../types/types";
+import { fetchProfile } from "../store/slices/profileSlice";
+import { useEffect } from "react";
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { userId } = useAppSelector((state) => state.authData);
+
   function authUser(values: LoginType) {
     dispatch(fetchLogin(values));
-    navigate(`/profile/${userId}`);
+    navigate('/')
   }
 
   const validationSchema = Yup.object().shape({
@@ -46,7 +48,7 @@ const Login = () => {
             password: "",
           }}
           onSubmit={(values) => authUser(values)}
-          validationSchema={validationSchema}
+          // validationSchema={validationSchema}
         >
           <Form className="space-y-5">
             <Input type="email" labelName="Email address" />
