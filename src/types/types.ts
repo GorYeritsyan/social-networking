@@ -1,5 +1,6 @@
 export type UsersInitState = {
-  users: UserDataType[] | null;
+  users: UserDataType[];
+  page: number
 };
 
 export type UserPhoto = {
@@ -52,3 +53,14 @@ export type LoginType = {
   email: string;
   password: string;
 }
+
+
+export type LoginResponseDataType = {
+  userId: number;
+};
+
+export type AuthMeDataType = {
+  id: number;
+  email: string;
+  login: string;
+};

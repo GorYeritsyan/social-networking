@@ -1,17 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthAPI } from "../../api/api";
-import { LoginType } from "../../types/types";
+import { AuthMeDataType, LoginResponseDataType, LoginType } from "../../types/types";
 
-type LoginResponseDataType = {
-  userId: number;
-  token: string;
-};
 
-type AuthMeDataType = {
-  id: number;
-  email: string;
-  login: string;
-};
 
 export const fetchLogin = createAsyncThunk<
   LoginResponseDataType,
@@ -31,17 +22,16 @@ export const authMe = createAsyncThunk<AuthMeDataType, void, {}>(
 );
 
 type LoginInitState = {
-  userId?: number;
+  userId: number | null;
   token?: string;
-  id?: number;
+  id?: number | null;
   email: string;
   login: string ;
 };
 
 const initialState: LoginInitState = {
-  userId: undefined,
-  token: '',
-  id: undefined,
+  userId: null,
+  id: null,
   email: '',
   login: '',
 };
@@ -52,7 +42,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      state.userId = action.payload.userId;
+      state.userId = action.payload.userId
     });
 
     builder.addCase(authMe.fulfilled, (state, action) => {

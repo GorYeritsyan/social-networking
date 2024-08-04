@@ -1,21 +1,22 @@
-import Button from "../components/Button";
-import Input from "../components/Input";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
+
+import Button from "../components/Button";
+import Input from "../components/Input";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { useEffect } from "react";
 import { fetchLogin } from "../store/slices/authSlice";
-import { Navigate, useNavigate } from "react-router-dom";
 import { LoginType } from "../types/types";
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const { userId } = useAppSelector((state) => state.authData);
   function authUser(values: LoginType) {
     dispatch(fetchLogin(values));
+    navigate(`/profile/${userId}`);
   }
-  
+
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Not a valid email address")
@@ -47,13 +48,11 @@ const Login = () => {
           onSubmit={(values) => authUser(values)}
           validationSchema={validationSchema}
         >
-          {() => (
-            <Form className="space-y-5">
-              <Input type="email" labelName="Email address" />
-              <Input type="password" labelName="Password" />
-              <Button />
-            </Form>
-          )}
+          <Form className="space-y-5">
+            <Input type="email" labelName="Email address" />
+            <Input type="password" labelName="Password" />
+            <Button />
+          </Form>
         </Formik>
       </div>
     </div>

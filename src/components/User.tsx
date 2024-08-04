@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { imageUrl } from "../api/api";
 import type { UserDataType } from "../types/types";
-import Container from "./Container";
 
 type UserProps = {
   user: UserDataType;
@@ -13,7 +12,7 @@ const User = ({ user }: UserProps) => {
       key={user.id}
       className=" hover:bg-gray-100 flex justify-between gap-x-6 py-5 px-4"
     >
-      <Container>
+      <div className="container">
         <div className="flex min-w-[1440px] gap-x-4">
           <NavLink to={`/profile/${user.id}`}>
             <img
@@ -32,7 +31,7 @@ const User = ({ user }: UserProps) => {
             </p>
           </div>
         </div>
-      </Container>
+      </div>
     </li>
   );
 };

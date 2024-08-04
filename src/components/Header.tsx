@@ -7,14 +7,6 @@ import { fetchProfile } from "../store/slices/profileSlice";
 import { imageUrl } from "../api/api";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const { id, login } = useAppSelector((state) => state.authData);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchProfile(`${id}`));
-    navigate("/");
-  }, [id]);
-
   const { myProfile } = useAppSelector((state) => state.profileData);
   return (
     <header className="flex items-center justify-around py-3 bg-gray-900 shadow-sm">
@@ -22,20 +14,18 @@ const Header = () => {
         <Link to="/">Social Network</Link>
       </h1>
 
-      {(!login) && (
+      {/* {login ? ( */}
+        {/* <NavLink to={`/profile/${id}`}> */}
+          {/* <img
+            className="w-10 h-10 rounded-full"
+            src={myProfile?.photos.small ? myProfile?.photos.small : imageUrl}
+          /> */}
+        {/* </NavLink> */}
+      {/* ) : ( */}
         <Link to="/login" className="text-white">
           <button>Sign In</button>
         </Link>
-      )}
-
-      {(login) && (
-        <NavLink to={`/profile/${id}`}>
-          <img
-            className="w-10 h-10 rounded-full"
-            src={myProfile?.photos.small ? myProfile?.photos.small : imageUrl}
-          />
-        </NavLink>
-      )}
+      {/* )} */}
     </header>
   );
 };
