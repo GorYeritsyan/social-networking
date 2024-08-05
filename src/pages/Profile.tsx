@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { useEffect } from "react";
 import { fetchProfile } from "../store/slices/profileSlice";
 import { imageUrl } from "../api/api";
+import EditButton from "../components/EditButton";
 
 const Profile = () => {
   const dispatch = useAppDispatch();
@@ -15,13 +16,14 @@ const Profile = () => {
   const { myProfile } = useAppSelector((state) => state.profileData);
   console.log(myProfile);
 
+
   return (
-    <div className="container py-10">
+    <div className="container py-10 flex flex-col space-y-10">
       <div className="flex space-x-24">
         <div>
           <img
             className="flex w-36 h-36 rounded-full"
-            src={myProfile?.photos.small ? myProfile.photos.large : imageUrl}
+            src={(typeof myProfile.photos !== 'undefined') && myProfile?.photos.small ? myProfile.photos.large : imageUrl}
           />
         </div>
         <div className="flex flex-col justify-center">
@@ -35,16 +37,25 @@ const Profile = () => {
             </span>
           </p>
           <p className="text-lg font-medium">
-            Looking for a job: <span className="font-normal">
-            {myProfile?.lookingForAJob ? "Yes" : "No"}
+            Looking for a job:{" "}
+            <span className="font-normal">
+              {myProfile?.lookingForAJob ? "Yes" : "No"}
             </span>
           </p>
           <p className="text-lg font-medium">
             Job description:{" "}
-            <span className="font-normal">{myProfile?.lookingForAJobDescription ? myProfile?.lookingForAJobDescription : "No"}</span>
+            <span className="font-normal">
+              {myProfile?.lookingForAJobDescription
+                ? myProfile?.lookingForAJobDescription
+                : "No"}
+            </span>
           </p>
         </div>
       </div>
+
+      <NavLink to={`/profile/edit`}>
+        <EditButton />
+      </NavLink>
     </div>
   );
 };

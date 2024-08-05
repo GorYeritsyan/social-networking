@@ -21,7 +21,7 @@ const ProfileImage = () => {
         <img
          onClick={() => setOpen(!open)}
           className="w-10 h-10 rounded-full cursor-pointer"
-          src={myProfile?.photos.small ? myProfile?.photos.small : imageUrl}
+          src={(typeof myProfile.photos !== 'undefined') && myProfile?.photos.small ? myProfile?.photos.small : imageUrl}
         />
        {open && <Popup />}
       </div>

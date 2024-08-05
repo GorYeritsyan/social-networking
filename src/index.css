@@ -18,6 +18,6 @@
 
 @layer utilities {
     .container{
-        @apply max-w-[1440px] m-auto flex justify-start
+        @apply max-w-[1440px] m-auto flex
     }
 }

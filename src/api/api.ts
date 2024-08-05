@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LoginType } from "../types/types";
+import { EditProfileDataType, LoginType } from "../types/types";
 
 export const imageUrl =
   "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
@@ -44,6 +44,25 @@ export const ProfileAPI = {
   getProfile(userId?: string) {
     return instance.get(`/profile/${userId}`);
   },
+  editProfile(data: EditProfileDataType){
+    return instance.put('/profile', data, {
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+  },
+
+  editProfilePhoto(file: FormData){
+    return instance.put(`/profile/photo`, file, {
+      headers: {
+        "Content-Type": 'multipart/form-data',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+  }
+
+
 };
 
 //create LOGIN page and FETCH more USERS by scrolling

@@ -26,14 +26,20 @@ export type UsersResponse = {
 // Profile
 
 export type ProfileResponseType = {
+  aboutMe?: string;
+  contacts?: ContactsStateType<string | null>;
+  lookingForAJob?: boolean;
+  lookingForAJobDescription?: string;
+  fullName?: string;
+  userId?: number;
+  photos?: UserPhoto;
+};
+
+export type EditProfileDataType = {
   aboutMe: string;
-  contacts: ContactsStateType<string | null>;
-  lookingForAJob: boolean;
   lookingForAJobDescription: string;
   fullName: string;
-  userId: number;
-  photos: UserPhoto;
-};
+}
 
 export type ContactsStateType<T> = {
   facebook: T;

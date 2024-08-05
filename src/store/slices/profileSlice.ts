@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ProfileAPI } from "../../api/api";
-import { ProfileResponseType, UserPhoto } from "../../types/types";
+import { EditProfileDataType, ProfileResponseType, UserPhoto } from "../../types/types";
 
 export const fetchProfile = createAsyncThunk<
   ProfileResponseType,
@@ -11,13 +11,29 @@ export const fetchProfile = createAsyncThunk<
   return res.data;
 });
 
+export const editProfile = createAsyncThunk<unknown, EditProfileDataType, {}>(
+  'editProfile',
+  async (data) => {
+    const res = await ProfileAPI.editProfile(data)
+    return res.data
+  }
+)
+
+export const fetchEditedPhoto = createAsyncThunk<UserPhoto, FormData, {}>(
+  'fetchEditedPhoto',
+  async (file) => {
+    const res = await ProfileAPI.editProfilePhoto(file)
+    return res.data.data.photos
+  }
+)
+
 
 type ProfileInitState = {
-  myProfile: ProfileResponseType | null;
+  myProfile: ProfileResponseType;
 };
 
 const initialState: ProfileInitState = {
-  myProfile: null,
+  myProfile: {},
 };
 
 const profileSlice = createSlice({
@@ -28,6 +44,10 @@ const profileSlice = createSlice({
     builder.addCase(fetchProfile.fulfilled, (state, action) => {
       state.myProfile = action.payload;
     });
+
+    builder.addCase(fetchEditedPhoto.fulfilled, (state, action) => {
+      state.myProfile.photos = action.payload
+    })
   },
 });
 

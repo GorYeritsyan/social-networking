@@ -27,7 +27,7 @@ const Login = () => {
       .min(6, "At least 6 letters")
       .max(20, "Too long. Max 20 letters")
       .matches(
-        /[A-Z]{1,}[a-z]{1,}[1-9]/,
+        /[a-z][1-9]/,
         "Password need to contain number, uppercase, lowercase and symbol ($,!,#..)"
       )
       .required("This field is required"),
@@ -48,11 +48,11 @@ const Login = () => {
             password: "",
           }}
           onSubmit={(values) => authUser(values)}
-          // validationSchema={validationSchema}
+          validationSchema={validationSchema}
         >
           <Form className="space-y-5">
-            <Input type="email" labelName="Email address" />
-            <Input type="password" labelName="Password" />
+            <Input name="email" id="email" type="email" labelName="Email address" />
+            <Input name="password" id="password" type="password" labelName="Password" />
             <Button />
           </Form>
         </Formik>

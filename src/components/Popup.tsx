@@ -20,7 +20,6 @@ const Popup = () => {
         <li>
           <NavLink to={`/profile/${loggedUser.id}`}>Profile</NavLink>
         </li>
-        <li>Settings</li>
         <li onClick={logoutProfile}>
           <NavLink to={`/login`}>Logout</NavLink>
         </li>
