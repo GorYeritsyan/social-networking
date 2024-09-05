@@ -8,14 +8,15 @@ import EditButton from "../components/EditButton";
 const Profile = () => {
   const dispatch = useAppDispatch();
   const { userId } = useParams();
+  const { loggedUser } = useAppSelector((state) => state.authData);
 
   useEffect(() => {
     dispatch(fetchProfile(userId));
   }, [userId]);
 
   const { myProfile } = useAppSelector((state) => state.profileData);
+  const newPhotos = JSON.parse(localStorage.getItem("photos"));
   console.log(myProfile);
-
 
   return (
     <div className="container py-10 flex flex-col space-y-10">
@@ -23,7 +24,11 @@ const Profile = () => {
         <div>
           <img
             className="flex w-36 h-36 rounded-full"
-            src={(typeof myProfile.photos !== 'undefined') && myProfile?.photos.small ? myProfile.photos.large : imageUrl}
+            src={
+              typeof userId === "string" && loggedUser.id === +userId
+                ? newPhotos.large
+                : myProfile.photos?.large ?? imageUrl
+            }
           />
         </div>
         <div className="flex flex-col justify-center">

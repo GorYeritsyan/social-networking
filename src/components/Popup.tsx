@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { useEffect } from "react";
-import { fetchAuthMe, fetchLogout } from "../store/slices/authSlice";
+import { fetchLogout } from "../store/slices/authSlice";
 
 const Popup = () => {
   const dispatch = useAppDispatch();

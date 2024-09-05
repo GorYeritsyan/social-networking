@@ -18,10 +18,9 @@ function ProfileEdit() {
   const [imageFile, setImageFile] = useState({})
 
   const formData = new FormData()
-  console.log(formData)
 
+  let newPhotos = JSON.parse(localStorage.getItem('photos'))
 
-  
   function editProfileInfo(data: EditProfileDataType){
     dispatch(editProfile(data))
     dispatch(fetchEditedPhoto(formData))
@@ -86,20 +85,12 @@ console.log(imageFile);
                     <img
                       className="w-12 h-12 rounded-full"
                       src={
-                       (typeof myProfile.photos !== 'undefined') && myProfile?.photos.small
-                          ? myProfile.photos.small
+                       (typeof newPhotos !== 'undefined') && newPhotos.small
+                          ? newPhotos.small
                           : imageUrl
                       }
                       alt=""
                     />
-                    {/* <button
-                      type="button"
-                      className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      Change
-                    </button> */}
-
-                    {/* <input type="file"  id="" /> */}
                     <Field onChange={changeProfilePhoto} type='file' name='file'/>
                   </div>
                 </div>

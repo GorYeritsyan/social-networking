@@ -10,7 +10,7 @@ const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0",
   headers: {
     "API-KEY": API_KEY,
-    // Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   },
 });
@@ -26,16 +26,16 @@ export const AuthAPI = {
     return instance.post(`/auth/login`, data);
   },
 
-  logout(){
-    return instance.post('/auth/logout')
+  logout() {
+    return instance.post("/auth/logout");
   },
 
   isAuth(newToken: string | null) {
     return instance.get("/auth/me", {
       withCredentials: true,
       headers: {
-        Authorization: `Bearer ${newToken}`
-      }
+        Authorization: `Bearer ${newToken}`,
+      },
     });
   },
 };
@@ -44,25 +44,21 @@ export const ProfileAPI = {
   getProfile(userId?: string) {
     return instance.get(`/profile/${userId}`);
   },
-  editProfile(data: EditProfileDataType){
-    return instance.put('/profile', data, {
+  editProfile(data: EditProfileDataType) {
+    return instance.put("/profile", data, {
       withCredentials: true,
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
   },
 
-  editProfilePhoto(file: FormData){
+  editProfilePhoto(file: FormData) {
     return instance.put(`/profile/photo`, file, {
       headers: {
-        "Content-Type": 'multipart/form-data',
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-  }
-
-
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+  },
 };
-
-//create LOGIN page and FETCH more USERS by scrolling
