@@ -1,6 +1,3 @@
-import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../hooks/hooks";
-
 const Button = () => {
   return (
     <button

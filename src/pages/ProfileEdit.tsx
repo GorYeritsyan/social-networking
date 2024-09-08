@@ -1,17 +1,18 @@
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
+import * as Yup from 'yup'
+
 import Input from "../components/Input";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { imageUrl } from "../api/api";
-import { NavLink, useNavigate } from "react-router-dom";
 import TextArea from "../components/Textarea";
 import { editProfile, fetchEditedPhoto, fetchProfile } from "../store/slices/profileSlice";
 import { EditProfileDataType } from "../types/types";
-import * as Yup from 'yup'
-import { useState } from "react";
 
 function ProfileEdit() {
-  const { myProfile } = useAppSelector((state) => state.profileData);
   const { loggedUser } = useAppSelector((state) => state.authData);
+ const {myProfile} = useAppSelector(state => state.profileData)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -19,7 +20,7 @@ function ProfileEdit() {
 
   const formData = new FormData()
 
-  let newPhotos = JSON.parse(localStorage.getItem('photos'))
+  let newPhotos = JSON.parse(localStorage.getItem('photos') as string)
 
   function editProfileInfo(data: EditProfileDataType){
     dispatch(editProfile(data))
@@ -35,8 +36,7 @@ function ProfileEdit() {
   })
 
 
-console.log(imageFile);
-
+  
   function changeProfilePhoto(e: any){
     formData.append('image', e.target.files[0])
   }
@@ -85,8 +85,8 @@ console.log(imageFile);
                     <img
                       className="w-12 h-12 rounded-full"
                       src={
-                       (typeof newPhotos !== 'undefined') && newPhotos.small
-                          ? newPhotos.small
+                       (typeof myProfile.photos !== 'undefined') && myProfile.photos.small
+                          ? myProfile.photos?.small
                           : imageUrl
                       }
                       alt=""

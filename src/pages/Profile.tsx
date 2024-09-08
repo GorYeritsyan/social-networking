@@ -1,6 +1,7 @@
-import { NavLink, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { fetchProfile } from "../store/slices/profileSlice";
 import { imageUrl } from "../api/api";
 import EditButton from "../components/EditButton";
@@ -15,8 +16,6 @@ const Profile = () => {
   }, [userId]);
 
   const { myProfile } = useAppSelector((state) => state.profileData);
-  const newPhotos = JSON.parse(localStorage.getItem("photos"));
-  console.log(myProfile);
 
   return (
     <div className="container py-10 flex flex-col space-y-10">
@@ -25,9 +24,7 @@ const Profile = () => {
           <img
             className="flex w-36 h-36 rounded-full"
             src={
-              typeof userId === "string" && loggedUser.id === +userId
-                ? newPhotos.large
-                : myProfile.photos?.large ?? imageUrl
+              typeof userId === "string" && loggedUser.id === +userId && myProfile.photos?.small ? myProfile.photos.small : imageUrl
             }
           />
         </div>
@@ -38,7 +35,7 @@ const Profile = () => {
             <span className="font-normal">
               {myProfile?.aboutMe
                 ? myProfile.aboutMe
-                : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore odit alias amet ipsa modi nam?"}
+                : "Empty"}
             </span>
           </p>
           <p className="text-lg font-medium">

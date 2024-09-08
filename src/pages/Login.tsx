@@ -7,8 +7,6 @@ import Input from "../components/Input";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { fetchLogin } from "../store/slices/authSlice";
 import { LoginType } from "../types/types";
-import { fetchProfile } from "../store/slices/profileSlice";
-import { useEffect } from "react";
 
 const Login = () => {
   const dispatch = useAppDispatch();

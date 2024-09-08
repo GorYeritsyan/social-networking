@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { addMoreUsers, fetchUsers } from "../store/slices/usersSlice";
+
 import User from "../components/User";
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const { users, page } = useAppSelector((state) => state.usersData);
+
   useEffect(() => {
     dispatch(fetchUsers(page));
   }, [page]);
-
 
   return (
     <div className="flex flex-col gap-y-5">

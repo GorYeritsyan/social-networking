@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AuthAPI, token } from "../../api/api";
+import { AuthAPI } from "../../api/api";
 import { AuthMeDataType, LoginResponseDataType, LoginType } from "../../types/types";
 
 export const fetchLogin = createAsyncThunk<
@@ -50,7 +50,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      state.userId = action.payload.userId,
+      state.userId = action.payload.userId; 
       localStorage.setItem('token', action.payload.token)
     });
 

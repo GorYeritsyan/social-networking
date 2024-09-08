@@ -27,7 +27,7 @@ export const fetchEditedPhoto = createAsyncThunk<UserPhoto, FormData, {}>(
   "fetchEditedPhoto",
   async (file) => {
     const res = await ProfileAPI.editProfilePhoto(file);
-    return res.data.data.photos;
+    return res.data.data;
   }
 );
 
