@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { addMoreUsers, fetchUsers } from "../store/slices/usersSlice";
+import {
+  addMoreUsers,
+  fetchUsers,
+  resetUsers,
+} from "../store/slices/usersSlice";
 
 import User from "../components/User";
 
@@ -12,6 +16,12 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchUsers(page));
   }, [page]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetUsers());
+    };
+  }, []);
 
   return (
     <div className="flex flex-col gap-y-5">

@@ -21,6 +21,10 @@ const usersSlice = createSlice({
     reducers: {
         addMoreUsers(state){
             state.page += 1
+        },
+        resetUsers(state){
+            state.users = [],
+            state.page = 1
         }
     },
     extraReducers: builder => {
@@ -30,6 +34,6 @@ const usersSlice = createSlice({
     }
 })
 
-export const {addMoreUsers} = usersSlice.actions
+export const {addMoreUsers, resetUsers} = usersSlice.actions
 
 export default usersSlice.reducer

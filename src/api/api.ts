@@ -6,7 +6,7 @@ export const imageUrl = "https://images.unsplash.com/photo-1472099645785-5658abf
 
 //Authorization
 const API_KEY = 'd6ad6035-023d-4093-b438-0b99459c3256';
-export const token = '73638a62-14e5-4390-a38c-720a73a6d32f';
+export const token = '062d133e-43a8-4e5c-bf2a-19acfece890a';
 
 const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0",
