@@ -17,6 +17,9 @@ const Home = () => {
     dispatch(fetchUsers(page));
   }, [page]);
 
+
+  // this code will run, when Home component will unmount
+
   useEffect(() => {
     return () => {
       dispatch(resetUsers());

@@ -5,8 +5,8 @@ import { EditProfileDataType, LoginType } from "../types/types";
 export const imageUrl = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
 
 //Authorization
-const API_KEY = 'd6ad6035-023d-4093-b438-0b99459c3256';
-export const token = '062d133e-43a8-4e5c-bf2a-19acfece890a';
+const API_KEY = process.env.REACT_APP_API_KEY;
+export const token = process.env.REACT_APP_TOKEN;
 
 const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0",
